@@ -1,0 +1,16 @@
+{
+    "name": "nanook/ensemble-cartes",
+    "description": "module pour portage Hanabi",
+    "autoload": {
+        "psr-4": {
+            "Nanook\\EnsembleCartes\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "nanookOlive",
+            "email": "olivier.stierer@gmail.com"
+        }
+    ],
+    "require": {}
+}
