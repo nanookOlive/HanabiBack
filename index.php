@@ -11,42 +11,32 @@ require_once __DIR__."/HanabiPartie.php";
 $partie = new HanabiPartie(3);
 
 $partie->init();
+
+
+
 $players=$partie->getPlayers();
 $player=$players[0];
 
-$main=$player->getMain();
+echo $player->poseCarte(new Carte("red",1));
+echo "<pre>";
+var_dump(HanabiPartie::getPile());
+echo "<pre>";
 
-echo "main initiale <br>";
-showMain($main);
-echo'<br>';
-echo "on defausse la 4<br>";
-$player->defausse($main[3]);
+echo $player->poseCarte(new Carte("red",2));
+echo "<pre>";
+var_dump(HanabiPartie::getPile());
+echo "<pre>";
 
-echo "la defausse <br>";
-showMain(HanabiPartie::getDefausse());
-echo'<br>';
+// $main=$player->getMain();
 
-$main=$player->getMain();
-
-echo "main 2 <br>";
-showMain($main);
-echo'<br>';
-echo "on defausse la 1<br>";
-$player->defausse($main[0]);
-echo "la defausse <br>";
-showMain(HanabiPartie::getDefausse());
-echo'<br>';
-
-$main=$player->getMain();
-
-echo "main 3 <br>";
-showMain($main);
-echo'<br>';
-echo "on defausse la 2<br>";
-$player->defausse($main[1]);
-echo "la defausse <br>";
-showMain(HanabiPartie::getDefausse());
-echo'<br>';
+// echo "main initiale <br>";
+// showMain($main);
+// echo'<br>';
+// echo "on defausse la 4<br>";
+// $player->defausse($main[3]);
+// echo "<pre>";
+// var_dump(($player->donnerIndice($player))["couleurs"]);
+// echo "<pre>";
 
 
 function showMain( $main){

@@ -10,6 +10,14 @@ class HanabiPartie extends Partie{
     private int $nbRedTokens=3;
     private int $score=0;
     private static array $defausse = [];
+    private bool $loose=false;
+    private static array $piles=[
+        "red"=>[false,false,false,false,false],
+        "blue"=>[false,false,false,false,false],
+        "green"=>[false,false,false,false,false],
+        "white"=>[false,false,false,false,false],
+        "yellow"=>[false,false,false,false,false],
+    ];
     
 
     public function __construct(Int $nbPlayers)
@@ -40,4 +48,13 @@ class HanabiPartie extends Partie{
    public static function getDefausse(){
     return self::$defausse;
    }
+
+   public static function getPile()
+   {
+    return self::$piles;
+   }
+   public static function setPile($color,$value){
+
+    self::$piles[$color][$value-1]=true;
+}
 }

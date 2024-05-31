@@ -70,4 +70,5 @@ class Jeu{
     public static function getPioche(){
         return self::$jeu;
     }
+   
 }
