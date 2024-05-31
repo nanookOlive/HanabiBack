@@ -12,5 +12,7 @@
             "email": "olivier.stierer@gmail.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "phpunit/phpunit": "^11.1"
+    }
 }
