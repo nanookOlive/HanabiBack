@@ -9,7 +9,7 @@ class HanabiPartie extends Partie{
     private int $nbBlueTokens=8;
     private int $nbRedTokens=3;
     private int $score=0;
-    private array $defausse = [];
+    private static array $defausse = [];
     
 
     public function __construct(Int $nbPlayers)
@@ -33,5 +33,11 @@ class HanabiPartie extends Partie{
     }
 
 
+   public static function addToDefausse(Carte $carte){
+        array_push(self::$defausse,$carte);
+   }
 
+   public static function getDefausse(){
+    return self::$defausse;
+   }
 }

@@ -67,5 +67,7 @@ class Jeu{
     public static function getCarte():Carte{
         return array_shift(self::$jeu);
     }
-
+    public static function getPioche(){
+        return self::$jeu;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace EnsembleCartes;
 require_once  __DIR__."/Carte.php";
+require_once __DIR__."/HanabiPartie.php";
 
 
 class Player{
@@ -30,11 +31,11 @@ class Player{
         
     }
 
-    public function pioche():array|false
+    public function pioche($index):array|false
     {
-        if(count($this->main)<=MAXCARTES){
+        if(count($this->main)<=MAXCARTES ){
             for($a=0;$a<PIOCHE;$a++){
-                $this->addCarte(Jeu::getCarte());
+                $this->addCarte(Jeu::getCarte(),$index);
                 
             }
             return $this->main;            
@@ -44,45 +45,69 @@ class Player{
         
     }
 
-    public function defausse(Carte $carteToDefausse):array|false
+    public function defausse(Carte $carteToDefausse):bool
     {
-        //on retire la carte 
-
-      
-            if($this->indexCarte($carteToDefausse) == null){
-                return false;
-            }else{
-                unset($this->main[$this->indexCarte($carteToDefausse)]);
-                //resize array
-                $tmpMain=[];
-                foreach($this->main as $carte){
-                    if($carte != null){
-                        array_push($tmpMain,$carte);
-                    }
+           
+                HanabiPartie::addToDefausse($carteToDefausse);
+                $index= $this->indexCarte($carteToDefausse);
+                //on pioche si il reste des cartes dans la pioche
+                if(!empty(Jeu::getPioche())){
+                    $this->pioche($index);
+                    return true;
+                }else{
+                    return false;
                 }
-                $this->main=$tmpMain;//pas sur valeur ou référence ? gestion mémoire 
-    
-                //on pioche 
-                $this->pioche();
-                //on renvoie la main
-                return $this->main;
-            }
-            
-        
-        
+               
+          //  }
     }
 
     public function indexCarte(Carte $carteNeedle):?int{
 
         $index=null;
         for($a=0;$a<count($this->main);$a++){
-            if($this->main[$a] == $carteNeedle){
+            if(($this->main[$a])->getValue() == $carteNeedle->getValue() && ($this->main[$a])->getColor()==$carteNeedle->getColor()){
                 $index=$a;
             }
         }
         return $index;
     }
 
+    public function donnerIndice(Player $player){
+
+        $valeurs=[
+            "1"=>[],
+            "2"=>[],
+            "3"=>[],
+            "4"=>[],
+            "5"=>[]
+        ];
+
+        foreach($player->getMain() as $carte){
+
+            switch($carte->getValue()){
+                case 1 :
+                    array_push($valeurs["1"],$carte);
+                    break;
+                case 2 :
+                    array_push($valeurs["2"],$carte);
+                    break;
+                case 3 :
+                    array_push($valeurs["3"],$carte);
+                    break;
+                case 4:
+                    array_push($valeur["4"],$carte);
+                case 5:
+                    array_push($valeur["5"],$carte);
+                    break;
+            }
+        }
+
+        $indicesValeurs=[];
+       
+        
+    }
+
+////////////////////////////////////getters/////////////////////////////////////////////
     public function getNbCartesInMain():Int
     {
         return count($this->main);
@@ -98,6 +123,9 @@ class Player{
     public function getIp():string
     {
         return $this->ip;
+    }
+    public function setPseudo(string $pseudo){
+        $this->pseudo=$pseudo;
     }
 
 }
