@@ -94,6 +94,11 @@ class Player{
         }
         if($flag && ($pile[$carte->getValue()-1]==false)){
             HanabiPartie::setPile($carte->getColor(),$carte->getValue());
+            //defausser la carte 
+            //en pioch
+            HanabiPartie::addPointScore();
+        }else{
+            $flag=false;
         }
         return$flag;
 

@@ -8,7 +8,7 @@ class HanabiPartie extends Partie{
 
     private int $nbBlueTokens=8;
     private int $nbRedTokens=3;
-    private int $score=0;
+    private static int $score=0;
     private static array $defausse = [];
     private bool $loose=false;
     private static array $piles=[
@@ -57,4 +57,14 @@ class HanabiPartie extends Partie{
 
     self::$piles[$color][$value-1]=true;
 }
+
+    public static function addPointScore()
+    {
+        self::$score ++;
+    }
+
+    public static function getScore():int
+    {
+        return self::$score;
+    }
 }

@@ -21,11 +21,13 @@ echo $player->poseCarte(new Carte("red",1));
 echo "<pre>";
 var_dump(HanabiPartie::getPile());
 echo "<pre>";
+echo "score = ".HanabiPartie::getScore()."<br>";
 
 echo $player->poseCarte(new Carte("red",2));
 echo "<pre>";
 var_dump(HanabiPartie::getPile());
 echo "<pre>";
+echo "score = ".HanabiPartie::getScore()."<br>";
 
 // $main=$player->getMain();
 
