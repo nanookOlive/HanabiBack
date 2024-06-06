@@ -6,28 +6,35 @@ require_once __DIR__."/Jeu.php";
 require_once __DIR__."/Partie.php";
 require_once __DIR__."/Player.php";
 require_once __DIR__."/HanabiPartie.php";
-
-
-$partie = new HanabiPartie(3);
-
-$partie->init();
+require_once __DIR__."/router/Router.php";
+use EnsembleCartes\Router;
 
 
 
-$players=$partie->getPlayers();
-$player=$players[0];
 
-echo $player->poseCarte(new Carte("red",1));
-echo "<pre>";
-var_dump(HanabiPartie::getPile());
-echo "<pre>";
-echo "score = ".HanabiPartie::getScore()."<br>";
+$route= new Router("EnsembleCartes");
+$route->callMethode(parse_url($_SERVER["REQUEST_URI"],PHP_URL_PATH),$_SERVER["REQUEST_METHOD"]);
 
-echo $player->poseCarte(new Carte("red",2));
-echo "<pre>";
-var_dump(HanabiPartie::getPile());
-echo "<pre>";
-echo "score = ".HanabiPartie::getScore()."<br>";
+// $partie = new HanabiPartie(3);
+
+// $partie->init();
+
+
+
+// $players=$partie->getPlayers();
+// $player=$players[0];
+
+// echo $player->poseCarte(new Carte("red",1));
+// echo "<pre>";
+// var_dump(HanabiPartie::getPile());
+// echo "<pre>";
+// echo "score = ".HanabiPartie::getScore()."<br>";
+
+// echo $player->poseCarte(new Carte("red",2));
+// echo "<pre>";
+// var_dump(HanabiPartie::getPile());
+// echo "<pre>";
+// echo "score = ".HanabiPartie::getScore()."<br>";
 
 // $main=$player->getMain();
 
