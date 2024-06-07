@@ -8,15 +8,15 @@ require_once __DIR__."/Player.php";
 class Partie{
 
     private array $jeu;
-    private array $players=[];
-    protected Int $nbPlayers;
+    private static array $players=[];
+    protected static Int $nbPlayers;
     protected Int $nbCartes;//nombre max de cartes dans un main
     //ou nombre decartes dans une main de départ
   
 
 
     public function __construct(Int $nbPlayers,Int $nbCartes){
-        $this->nbPlayers=$nbPlayers;
+        self::$nbPlayers=$nbPlayers;
         // $this->nbCartes=$nbCartes;
         define("NBPLAYERS",$nbPlayers);
         define("MAXCARTES",$nbCartes);
@@ -27,11 +27,11 @@ class Partie{
 
     public function init(){
         //on instancie les joueurs avec les infos fetch en connexion
-        for($a=0;$a<$this->nbPlayers;$a++){
+        for($a=0;$a<self::$nbPlayers;$a++){
             $player=new Player();
-            array_push($this->players,$player);
+            array_push(self::$players,$player);
         }
-        Jeu::distribCartesOneByOne($this->players,MAXCARTES);
+        Jeu::distribCartesOneByOne(self::$players,MAXCARTES);
     }
     
 
@@ -40,9 +40,9 @@ class Partie{
         return $this->jeu;
     }
 
-    public  function getPlayers():array
+    public  static function getPlayers():array
     {
-        return $this->players;
+        return self::$players;
     }
 
     public function getNbPlayers():int 

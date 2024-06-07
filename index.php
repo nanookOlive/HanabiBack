@@ -9,15 +9,16 @@ require_once __DIR__."/HanabiPartie.php";
 require_once __DIR__."/router/Router.php";
 use EnsembleCartes\Router;
 
+$partie = new HanabiPartie(3);
 
+$partie->init();
 
+($partie::getPlayers())[0]->setPseudo("Nanook");
 
 $route= new Router("EnsembleCartes");
 $route->callMethode(parse_url($_SERVER["REQUEST_URI"],PHP_URL_PATH),$_SERVER["REQUEST_METHOD"]);
 
-// $partie = new HanabiPartie(3);
 
-// $partie->init();
 
 
 
