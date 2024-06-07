@@ -3,6 +3,8 @@ namespace EnsembleCartes;
 
 class PartieController{
 
+    public function createPartie(){}
+    
     public function init(){
         echo "endpoint reached";
     }
