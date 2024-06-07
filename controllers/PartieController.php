@@ -1,6 +1,24 @@
 <?php
 namespace EnsembleCartes;
 
+header("Access-Control-Allow-Origin: *");
+
+// Allow specific HTTP methods
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+
+// Allow specific headers
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// Optionally set the max age for preflight requests
+header("Access-Control-Max-Age: 86400");
+
+// Handle preflight OPTIONS requests
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    // If you want to allow OPTIONS requests, respond with 200 OK
+    header("HTTP/1.1 200 OK");
+    exit();
+}
+
 class PartieController{
 
     public function createPartie(){}
@@ -29,4 +47,5 @@ class PartieController{
             echo "player not found";
         }
     }
+    
 }
