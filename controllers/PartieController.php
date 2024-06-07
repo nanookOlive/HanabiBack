@@ -22,7 +22,7 @@ class PartieController{
             }
         }
         if($tmpPlayer != null){
-            echo $player->getPseudo();
+            echo json_encode($tmpPlayer);
         }else{
             echo "player not found";
         }
