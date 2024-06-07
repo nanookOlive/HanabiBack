@@ -5,7 +5,7 @@ require_once  __DIR__."/Carte.php";
 require_once __DIR__."/HanabiPartie.php";
 
 
-class Player{
+class Player implements \JsonSerializable{
 
     private array $main=[];
     private string $pseudo;
@@ -18,6 +18,13 @@ class Player{
     //     $this->ip=$ip;
     // }
 
+    public function jsonSerialize(){
+        return [
+            "pseudo"=>$this->pseudo,
+            "ip"=>$this->ip,
+            "main"=>$this->main
+        ];
+    }
     public function addCarte(Carte $carte, int $index=0){
 
         if(count($this->main)<= MAXCARTES){
@@ -195,6 +202,9 @@ class Player{
     }
     public function setPseudo(string $pseudo){
         $this->pseudo=$pseudo;
+    }
+    public function setIp(string $ip){
+        $this->ip=$ip;
     }
 
 }
