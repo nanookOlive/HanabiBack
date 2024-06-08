@@ -12,11 +12,11 @@ class HanabiPartie extends Partie{
     private static array $defausse = [];
     private bool $loose=false;
     private static array $piles=[
-        "red"=>[false,false,false,false,false],
-        "blue"=>[false,false,false,false,false],
-        "green"=>[false,false,false,false,false],
-        "white"=>[false,false,false,false,false],
-        "yellow"=>[false,false,false,false,false],
+        "rouge"=>[false,false,false,false,false],
+        "bleu"=>[false,false,false,false,false],
+        "vert"=>[false,false,false,false,false],
+        "blanc"=>[false,false,false,false,false],
+        "jaune"=>[false,false,false,false,false],
     ];
     
 
@@ -49,6 +49,10 @@ class HanabiPartie extends Partie{
     return self::$defausse;
    }
 
+   public static function getCarte():Carte{
+    return array_shift(self::$jeu);
+    }
+
    public static function getPile()
    {
     return self::$piles;
@@ -78,7 +82,8 @@ class HanabiPartie extends Partie{
             "nbTokenRed"=>self::$nbRedTokens,
             "score"=>self::$score,
             "piles"=>self::$piles,
-            "players"=>self::$players
+            "players"=>self::$players,
+            "pioche"=>self::$jeu
 
         ];
 

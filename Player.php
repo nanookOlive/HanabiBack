@@ -42,7 +42,7 @@ class Player implements \JsonSerializable{
     {
         if(count($this->main)<=MAXCARTES ){
             for($a=0;$a<PIOCHE;$a++){
-                $this->addCarte(Jeu::getCarte(),$index);
+                $this->addCarte(HanabiPartie::getCarte(),$index);
                 
             }
             return $this->main;            
@@ -55,10 +55,12 @@ class Player implements \JsonSerializable{
     public function defausse(Carte $carteToDefausse):bool
     {
            
+                //on ajoute la carte à la défausse
                 HanabiPartie::addToDefausse($carteToDefausse);
+
                 $index= $this->indexCarte($carteToDefausse);
                 //on pioche si il reste des cartes dans la pioche
-                if(!empty(Jeu::getPioche())){
+                if(!empty(HanabiPartie::getJeu())){
                     $this->pioche($index);
                     return true;
                 }else{
@@ -126,16 +128,16 @@ class Player implements \JsonSerializable{
             "5"=>[]
         ];
         $couleurs=[
-            "red"=>[],
-            "blue"=>[],
-            "white"=>[],
-            "yellow"=>[],
-            "green"=>[]
+            "rouge"=>[],
+            "bleu"=>[],
+            "blanc"=>[],
+            "jaune"=>[],
+            "vert"=>[]
         ];
         
 
         foreach($player->getMain() as $carte){
-            $index = $this->indexCarte($carte);
+            //$index = $this->indexCarte($carte);
 
             switch($carte->getValue()){
                 case 1 :
@@ -155,20 +157,20 @@ class Player implements \JsonSerializable{
                     break;
             }
             switch($carte->getColor()){
-                case "red" :
-                    array_push($couleurs["red"],$carte->getId());
+                case "rouge" :
+                    array_push($couleurs["rouge"],$carte->getId());
                     break;
-                case "white" :       ////traitement du tableau afin d'obtenir la carte $index est un  $valeur
-                    array_push($couleurs["white"],$carte->getId());
+                case "blanc" :       ////traitement du tableau afin d'obtenir la carte $index est un  $valeur
+                    array_push($couleurs["blanc"],$carte->getId());
                     break;
-                case "yellow" :
-                    array_push($couleurs["yellow"],$carte->getId());
+                case "jaune" :
+                    array_push($couleurs["jaune"],$carte->getId());
                     break;
-                case "blue":
-                    array_push($couleurs["blue"],$carte->getId());
+                case "bleu":
+                    array_push($couleurs["bleu"],$carte->getId());
                     break;
-                case "green":
-                    array_push($couleurs["green"],$carte->getId());
+                case "vert":
+                    array_push($couleurs["vert"],$carte->getId());
                     break;
             }
 
@@ -202,7 +204,8 @@ class Player implements \JsonSerializable{
                 array_push($indicesString,$tmpStr);
             }
             
-        }
+        }                $tmpStr .= " est $couleur";
+
        
         //return $indicesValeurs;
         return $indicesString;

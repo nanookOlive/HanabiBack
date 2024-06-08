@@ -71,7 +71,10 @@ class PartieController{
         
         //var_dump($tmpPlayerA->donnerIndice($tmpPlayerB));
         echo json_encode($tmpPlayerA->donnerIndice($tmpPlayerB));
-
+        //var_dump(HanabiPartie::getJeu());
     }
     
+    public function getPioche(){
+        echo json_encode(HanabiPartie::getJeu());
+    }
 }

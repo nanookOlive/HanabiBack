@@ -11,6 +11,7 @@ class Routes{
         ['GET','players',PartieController::class,'getPlayers'],
         ['GET','player/{pseudo}',PartieController::class,'getPlayerByPseudo'],
         ['POST','indice',PartieController::class,'getIndice'],
+        ['GET','pioche',PartieController::class,'getPioche']
        
     ];
 

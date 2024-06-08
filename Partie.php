@@ -7,7 +7,7 @@ require_once __DIR__."/Player.php";
 
 class Partie{
 
-    private array $jeu;
+    protected static array $jeu;
     protected static array $players=[];
     protected static Int $nbPlayers;
     protected Int $nbCartes;//nombre max de cartes dans un main
@@ -21,7 +21,7 @@ class Partie{
         define("NBPLAYERS",$nbPlayers);
         define("MAXCARTES",$nbCartes);
 
-        $this->jeu=Jeu::getJeu(true);
+        self::$jeu=Jeu::getJeu(true);
 
     }
 
@@ -31,13 +31,23 @@ class Partie{
             $player=new Player();
             array_push(self::$players,$player);
         }
-        Jeu::distribCartesOneByOne(self::$players,MAXCARTES);
+        self::distribCartesOneByOne(self::$players,self::$jeu);
+
     }
     
-
-    public function getJeu():array
+    public static function distribCartesOneByOne()
     {
-        return $this->jeu;
+        for($a=0;$a<MAXCARTES;$a++){
+            foreach(self::$players as $player){
+                $carte=array_shift(self::$jeu);
+                $player->addCarte($carte);
+             }
+        }
+        
+    }
+    public static function getJeu():array
+    {
+        return self::$jeu;
     }
 
     public  static function getPlayers():array

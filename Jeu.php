@@ -9,11 +9,11 @@ class Jeu{
 
     private static $jeu=[];
     private static $colors=[
-        "red",
-        "green",
-        "blue",
-        "yellow",
-        "white"
+        "rouge",
+        "vert",
+        "bleu",
+        "jaune",
+        "blanc"
     ];
 
     public static function getJeu(bool $shuffled=false):array
@@ -58,19 +58,8 @@ class Jeu{
     }
 
     //distribue n fois 1 carte à n joueurs chacun leur tour
-    public static function distribCartesOneByOne(Array $players)
-    {
-        for($a=0;$a<MAXCARTES;$a++){
-            foreach($players as $player){
-                $carte=array_shift(self::$jeu);
-                $player->addCarte($carte);
-             }
-        }
-        
-    }
-    public static function getCarte():Carte{
-        return array_shift(self::$jeu);
-    }
+    
+   
     public static function getPioche(){
         return self::$jeu;
     }
