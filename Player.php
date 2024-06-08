@@ -139,47 +139,73 @@ class Player implements \JsonSerializable{
 
             switch($carte->getValue()){
                 case 1 :
-                    array_push($valeurs["1"],$index);
+                    array_push($valeurs["1"],$carte->getId());
                     break;
                 case 2 :
-                    array_push($valeurs["2"],$index);
+                    array_push($valeurs["2"],$carte->getId());
                     break;
                 case 3 :
-                    array_push($valeurs["3"],$index);
+                    array_push($valeurs["3"],$carte->getId());
                     break;
                 case 4:
-                    array_push($valeurs["4"],$index);
+                    array_push($valeurs["4"],$carte->getId());
                     break;
                 case 5:
-                    array_push($valeurs["5"],$index);
+                    array_push($valeurs["5"],$carte->getId());
                     break;
             }
             switch($carte->getColor()){
                 case "red" :
-                    array_push($couleurs["red"],$index);
+                    array_push($couleurs["red"],$carte->getId());
                     break;
-                case" white" :
-                    array_push($couleurs["white"],$index);
+                case "white" :       ////traitement du tableau afin d'obtenir la carte $index est un  $valeur
+                    array_push($couleurs["white"],$carte->getId());
                     break;
                 case "yellow" :
-                    array_push($couleurs["yellow"],$index);
+                    array_push($couleurs["yellow"],$carte->getId());
                     break;
                 case "blue":
-                    array_push($couleurs["blue"],$index);
+                    array_push($couleurs["blue"],$carte->getId());
                     break;
                 case "green":
-                    array_push($couleurs["green"],$index);
+                    array_push($couleurs["green"],$carte->getId());
                     break;
             }
 
         }
 
-        $indicesValeurs=[
-            "valeurs"=>$valeurs,
-            "couleurs"=>$couleurs
-        ];
+       ////traitement du tableau afin d'obtenir la carte $index est un  $valeur
+
+       $indicesString=[];
+
+        foreach($valeurs as $valeur => $index){
+            
+            if(!empty($index)){
+                $tmpStr=(count($index)>1)? "Les cartes " : "La carte ";
+                foreach($index as $gugu ){
+                    $tmpStr .= $gugu." ";
+                }
+                $tmpStr.=(count($index)>1)? "sont des $valeur " : "est un $valeur.";
+
+                array_push($indicesString,$tmpStr);
+            }
+            
+        }
+        foreach($couleurs as $couleur => $index){
+            if(!empty($index)){
+                $tmpStr=(count($index)>1)? "Les carte " : "La carte ";
+
+                foreach($index as $gugu ){
+                    $tmpStr .= $gugu." ";
+                }
+                $tmpStr.=(count($index)>1)? "sont $couleur " : "est $couleur.";
+                array_push($indicesString,$tmpStr);
+            }
+            
+        }
        
-        return $indicesValeurs;
+        //return $indicesValeurs;
+        return $indicesString;
         
     }
 

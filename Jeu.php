@@ -18,28 +18,32 @@ class Jeu{
 
     public static function getJeu(bool $shuffled=false):array
     {
+        $index = 0;
         foreach(self::$colors as $color){
             for($valeur=1;$valeur<6;$valeur++){
 
                switch($valeur){
                 case 1:
                     for($a=0;$a<3;$a++){
-                        $tmpCarte=new Carte($color,$valeur);
+                        $tmpCarte=new Carte($index,$color,$valeur);
                         array_push(self::$jeu,$tmpCarte);
+                        $index ++;
                     };
                     break;
                 case 2:
                 case 3:
                 case 4:
                     for($a=0;$a<2;$a++){
-                        $tmpCarte=new Carte($color,$valeur);
+                        $tmpCarte=new Carte($index,$color,$valeur);
                         array_push(self::$jeu,$tmpCarte);
+                        $index++;
 
                     };
                     break;
                 case 5:
-                    $tmpCarte=new Carte($color,$valeur);
+                    $tmpCarte=new Carte($index,$color,$valeur);
                     array_push(self::$jeu,$tmpCarte);
+                    $index ++;
                     break;
                }
             }
