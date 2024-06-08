@@ -8,7 +8,7 @@ require_once __DIR__."/Player.php";
 class Partie{
 
     private array $jeu;
-    private static array $players=[];
+    protected static array $players=[];
     protected static Int $nbPlayers;
     protected Int $nbCartes;//nombre max de cartes dans un main
     //ou nombre decartes dans une main de départ

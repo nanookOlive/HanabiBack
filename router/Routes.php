@@ -9,7 +9,8 @@ class Routes{
         ['GET','init',PartieController::class,'init'],
         ['GET','status',PartieController::class,'getStatus'],
         ['GET','players',PartieController::class,'getPlayers'],
-        ['GET','player/{pseudo}',PartieController::class,'getPlayerByPseudo']
+        ['GET','player/{pseudo}',PartieController::class,'getPlayerByPseudo'],
+        ['POST','indice',PartieController::class,'getIndice'],
        
     ];
 

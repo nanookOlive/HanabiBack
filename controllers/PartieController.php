@@ -47,5 +47,29 @@ class PartieController{
             echo "player not found";
         }
     }
+    public function getIndice( array $players){
+
+        //on cherche les jouers selon leur pseudo
+        $allPlayers = HanabiPartie::getPlayers();
+        $pseudoPlayerA=$players["playerA"];
+        $pseudoPlayerB=$players["playerB"];
+
+        $tmpPlayerA=null;
+        $tmpPlayerB=null;
+        foreach($allPlayers as $player){
+            if($player->getPseudo() == $pseudoPlayerA){
+                $tmpPlayerA = $player; 
+            }
+        }
+        foreach($allPlayers as $player){
+            if($player->getPseudo() == $pseudoPlayerB){
+                $tmpPlayerB = $player; 
+            }
+        }
+
+        var_dump($tmpPlayerA->donnerIndice($tmpPlayerB));
+        //echo json_encode($tmpPlayerA->donnerIndice($tmpPlayerB));
+
+    }
     
 }

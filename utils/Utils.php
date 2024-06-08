@@ -74,7 +74,7 @@ class Utils{
 
     public static function extractParam(String $request):?String
     {
-        preg_match('/(.*)\/([A-Za-z0-9]*)$/',$request,$matches);
+        preg_match('/(.*)\/([A-Za-z0-9\-]*)$/',$request,$matches);
         return $matches[2];
     }
 

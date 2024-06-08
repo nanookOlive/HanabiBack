@@ -77,7 +77,8 @@ class HanabiPartie extends Partie{
             "nbTokenBlue"=>self::$nbBlueTokens,
             "nbTokenRed"=>self::$nbRedTokens,
             "score"=>self::$score,
-            "piles"=>self::$piles
+            "piles"=>self::$piles,
+            "players"=>self::$players
 
         ];
 
