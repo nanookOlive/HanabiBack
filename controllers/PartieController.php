@@ -1,5 +1,6 @@
 <?php
 namespace EnsembleCartes;
+session_start();
 
 header("Access-Control-Allow-Origin: *");
 
@@ -18,13 +19,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     header("HTTP/1.1 200 OK");
     exit();
 }
-
 class PartieController{
 
-    public function createPartie(){}
+    public function createPartie(){
+
+        $partie = new HanabiPartie(3);
+        $_SESSION["partie"]=\serialize($partie);
+        
+    }
     
     public function init(){
-        echo "endpoint reached";
+        $partie=\unserialize($_SESSION["partie"]);
+        var_dump($partie);
+        //$partie->init();
+        // //HanabiPartie::init();
+        // echo json_encode(HanabiPartie::partieExists());
+       // var_dump($_SESSION);
     }
     public function getStatus(){
         echo HanabiPartie::getStatus();
@@ -76,5 +86,10 @@ class PartieController{
     
     public function getPioche(){
         echo json_encode(HanabiPartie::getJeu());
+    }
+
+    public function partieExists(){
+          //echo json_encode(HanabiPartie::partieExists());
+        echo json_encode("prout");
     }
 }

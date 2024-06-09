@@ -2,8 +2,8 @@
 
 namespace EnsembleCartes;
 require_once __DIR__."/Partie.php";
-
-class HanabiPartie extends Partie{
+require_once __DIR__."/Player.php";
+class HanabiPartie extends Partie {
 
 
     private static int $nbBlueTokens=8;
@@ -40,6 +40,7 @@ class HanabiPartie extends Partie{
         define("PIOCHE",1);
     }
 
+ 
 
    public static function addToDefausse(Carte $carte){
         array_push(self::$defausse,$carte);

@@ -7,6 +7,7 @@ require_once __DIR__."/Player.php";
 
 class Partie{
 
+    protected static bool $exists=false;
     protected static array $jeu;
     protected static array $players=[];
     protected static Int $nbPlayers;
@@ -25,8 +26,9 @@ class Partie{
 
     }
 
-    public function init(){
-        //on instancie les joueurs avec les infos fetch en connexion
+    public static function init(){
+        self::$exists=true;
+        //on instancie les joueurs avec les infos fetch en connexion 
         for($a=0;$a<self::$nbPlayers;$a++){
             $player=new Player();
             array_push(self::$players,$player);
@@ -34,6 +36,18 @@ class Partie{
         self::distribCartesOneByOne(self::$players,self::$jeu);
 
     }
+   
+    // public  function init(){
+    //     //on instancie les joueurs avec les infos fetch en connexion 
+    //     for($a=0;$a<self::$nbPlayers;$a++){
+    //         $player=new Player();
+    //         array_push(self::$players,$player);
+    //     }
+    //     self::distribCartesOneByOne(self::$players,self::$jeu);
+    //     self::$exists=true;
+
+
+    // }
     
     public static function distribCartesOneByOne()
     {
@@ -58,6 +72,10 @@ class Partie{
     public function getNbPlayers():int 
     {
         return NBPLAYERS;
+    }
+    public static function partieExists():bool 
+    {
+        return self::$exists;
     }
 
 }
