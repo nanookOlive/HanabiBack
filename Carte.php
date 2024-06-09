@@ -5,7 +5,7 @@ namespace EnsembleCartes;
  * il est parfaitement envisageable de faire
  * sans l'objet carte 
  */
-class Carte implements \JsonSerializable{
+class Carte implements \JsonSerializable, \Serializable{
 
     public function __construct(
         private $id,
@@ -20,6 +20,22 @@ class Carte implements \JsonSerializable{
             "value"=>$this->value
 
         ];
+    }
+    public function serialize(){
+        return serialize(
+            [
+                "id"=>$this->id,
+                "color"=>$this->color,
+                "value"=>$this->value
+            ]
+            );
+    }
+
+    public function unserialize(string $data){
+        $unData = unserialize($data);
+        $this->id=$unData["id"];
+        $this->color=$unData["color"];
+        $this->value=$unData["value"];
     }
 
     public function getId():int{

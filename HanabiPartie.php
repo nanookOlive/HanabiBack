@@ -3,7 +3,8 @@
 namespace EnsembleCartes;
 require_once __DIR__."/Partie.php";
 require_once __DIR__."/Player.php";
-class HanabiPartie extends Partie {
+use EnsembleCartes\Partie;
+class HanabiPartie extends Partie implements \Serializable{
 
 
     private static int $nbBlueTokens=8;
@@ -40,8 +41,33 @@ class HanabiPartie extends Partie {
         define("PIOCHE",1);
     }
 
- 
+    public function serialize(){
+        return serialize(
+            [
+                "parentData"=>parent::serialize(),
+                "loose"=>$this->loose,
+                "staticData"=>[
+                "nbBlueTokens"=>self::$nbBlueTokens,
+                "nbRedTokens"=>self::$nbRedTokens,
+                "score"=>self::$score,
+                "defausse"=>self::$defausse,
+                "piles"=>self::$piles]
+            ]
+        );
+    }
+    public function unserialize(string $data){
+        $unData=unserialize($data);
+        parent::unserialize($unData["parentData"]);
+        $this->loose=$unData["loose"];
+        $staticData=$unData["staticData"];
+        self::$nbBlueTokens=$staticData["nbBlueTokens"];
+        self::$nbRedTokens=$staticData["nbRedTokens"];
+        self::$score=$staticData["score"];
+        self::$defausse=$staticData["defausse"];
+        self::$piles=$staticData["piles"];
 
+
+    }
    public static function addToDefausse(Carte $carte){
         array_push(self::$defausse,$carte);
    }

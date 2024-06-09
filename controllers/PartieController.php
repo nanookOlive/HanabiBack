@@ -2,7 +2,7 @@
 namespace EnsembleCartes;
 session_start();
 
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin:http://localhost:4200");
 
 // Allow specific HTTP methods
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
@@ -13,6 +13,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 // Optionally set the max age for preflight requests
 header("Access-Control-Max-Age: 86400");
 
+header("Access-Control-Allow-Credentials: true");
 // Handle preflight OPTIONS requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     // If you want to allow OPTIONS requests, respond with 200 OK
@@ -23,24 +24,32 @@ class PartieController{
 
     public function createPartie(){
 
-        $partie = new HanabiPartie(3);
+        $partie = new HanabiPartie(2);
         $_SESSION["partie"]=\serialize($partie);
+        echo json_encode(session_id());
         
     }
     
     public function init(){
         $partie=\unserialize($_SESSION["partie"]);
-        var_dump($partie);
-        //$partie->init();
-        // //HanabiPartie::init();
-        // echo json_encode(HanabiPartie::partieExists());
-       // var_dump($_SESSION);
+        $partie->init();
+
+        ($partie::getPlayers())[0]->setPseudo("Nanook");
+        ($partie::getPlayers())[0]->setIp("192.1.0.123");
+        ($partie::getPlayers())[1]->setPseudo("Piki");
+        ($partie::getPlayers())[1]->setIp("193.1.0.123");
+        $_SESSION["partie"]=\serialize($partie);
+        echo json_encode(session_id());
+
+
+       
     }
     public function getStatus(){
-        echo HanabiPartie::getStatus();
+       echo  \unserialize($_SESSION["partie"])::getStatus();
     }
     public  function getPlayers(){
-        echo json_encode(HanabiPartie::getPlayers());
+
+        echo json_encode(\unserialize($_SESSION["partie"])::getPlayers());
     }
     public function getPlayerByPseudo(string $pseudo){
         //on cherche dans la liste de tous les joueurs
@@ -90,6 +99,6 @@ class PartieController{
 
     public function partieExists(){
           //echo json_encode(HanabiPartie::partieExists());
-        echo json_encode("prout");
+          echo json_encode(\unserialize($_SESSION["partie"])::partieExists());
     }
 }
