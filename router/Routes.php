@@ -13,7 +13,7 @@ class Routes{
         ['POST','indice',PartieController::class,'getIndice'],
         ['GET','pioche',PartieController::class,'getPioche'],
         ['GET','partieExists',PartieController::class,"partieExists"],
-        ['GET','create',PartieController::class,"createPartie"],
+        ['POST','create',PartieController::class,"createPartie"],
 
         
        

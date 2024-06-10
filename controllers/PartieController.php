@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 class PartieController{
 
-    public function createPartie(){
+    public function createPartie(int $nbPlayers){
 
-        $partie = new HanabiPartie(2);
+        $partie = new HanabiPartie($nbPlayers);
         $_SESSION["partie"]=\serialize($partie);
-        echo json_encode(session_id());
+        //echo json_encode(session_id());
         
     }
     
