@@ -108,4 +108,7 @@ class Partie {
     {
         return self::$maxCartes;
     }
+    public static function addPlayerToPartie(Player $player){
+        array_push(self::$players,$player);
+    }
 }

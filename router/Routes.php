@@ -14,6 +14,7 @@ class Routes{
         ['GET','pioche',PartieController::class,'getPioche'],
         ['GET','partieExists',PartieController::class,"partieExists"],
         ['POST','create',PartieController::class,"createPartie"],
+        ['POST','addPlayer',PartieController::class,'addPlayer'],
 
         
        

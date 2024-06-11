@@ -22,9 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 class PartieController{
 
-    public function createPartie(int $nbPlayers){
+    public function createPartie($data){
 
-        $partie = new HanabiPartie($nbPlayers);
+        $nbJoueurs=$data["nbJoueurs"];
+        $partie = new HanabiPartie($nbJoueurs);
         $_SESSION["partie"]=\serialize($partie);
         //echo json_encode(session_id());
         
@@ -34,10 +35,10 @@ class PartieController{
         $partie=\unserialize($_SESSION["partie"]);
         $partie->init();
 
-        ($partie::getPlayers())[0]->setPseudo("Nanook");
-        ($partie::getPlayers())[0]->setIp("192.1.0.123");
-        ($partie::getPlayers())[1]->setPseudo("Piki");
-        ($partie::getPlayers())[1]->setIp("193.1.0.123");
+        // ($partie::getPlayers())[0]->setPseudo("Nanook");
+        // ($partie::getPlayers())[0]->setIp("192.1.0.123");
+        // ($partie::getPlayers())[1]->setPseudo("Piki");
+        // ($partie::getPlayers())[1]->setIp("193.1.0.123");
         $_SESSION["partie"]=\serialize($partie);
         echo json_encode(session_id());
 
@@ -99,6 +100,27 @@ class PartieController{
 
     public function partieExists(){
           //echo json_encode(HanabiPartie::partieExists());
-          echo json_encode(\unserialize($_SESSION["partie"])::partieExists());
+          if(isset($_SESSION["partie"])){
+            echo json_encode(\unserialize($_SESSION["partie"])::partieExists());
+
+          }else{
+            echo json_encode(false);
+          }
+    }
+    public function addPlayer(array $data){
+        //on crée un objet Player
+        $tmpPlayer = new Player;
+        //on set son ip 
+        $tmpPlayer->setIp($_SERVER["REMOTE_ADDR"]);
+        //on set son pseudo
+        $tmpPlayer->setPseudo($data["pseudo"]);
+        // sa main sera set lors de l'init de la partie
+        //on récupère la partie stockée dans la session
+        $partie = \unserialize($_SESSION["partie"]);
+        $partie::addPlayerToPartie($tmpPlayer);
+        $res=$partie::getStatus();
+        $_SESSION["partie"]=\serialize($partie);
+        echo $res;
+
     }
 }
