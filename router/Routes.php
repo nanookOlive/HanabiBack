@@ -15,6 +15,7 @@ class Routes{
         ['GET','partieExists',PartieController::class,"partieExists"],
         ['POST','create',PartieController::class,"createPartie"],
         ['POST','addPlayer',PartieController::class,'addPlayer'],
+        ['GET','isFull',PartieController::class,"isFull"]
 
         
        

@@ -108,19 +108,32 @@ class PartieController{
           }
     }
     public function addPlayer(array $data){
-        //on crée un objet Player
-        $tmpPlayer = new Player;
-        //on set son ip 
-        $tmpPlayer->setIp($_SERVER["REMOTE_ADDR"]);
-        //on set son pseudo
-        $tmpPlayer->setPseudo($data["pseudo"]);
-        // sa main sera set lors de l'init de la partie
-        //on récupère la partie stockée dans la session
         $partie = \unserialize($_SESSION["partie"]);
-        $partie::addPlayerToPartie($tmpPlayer);
-        $res=$partie::getStatus();
-        $_SESSION["partie"]=\serialize($partie);
-        echo $res;
 
+        //si count de get Player < partie::getNbPlayers
+       
+
+            //on crée un objet Player
+            $tmpPlayer = new Player;
+            //on set son ip 
+            $tmpPlayer->setIp($_SERVER["REMOTE_ADDR"]);
+            //on set son pseudo
+            $tmpPlayer->setPseudo($data["pseudo"]);
+            // sa main sera set lors de l'init de la partie
+            //on récupère la partie stockée dans la session
+            $partie::addPlayerToPartie($tmpPlayer);
+            if(count($partie::getPlayers())>= $partie::getNbPlayers()){
+                $partie::setIsFull(true);
+
+            }
+        
+            $_SESSION["partie"]=\serialize($partie);
+            //echo json_encode("impossible d'ajouter un nouveau joueur");
+        
+    }
+
+    public function isFull(){
+        $partie = \unserialize($_SESSION["partie"]);
+        echo json_encode($partie::isFull());
     }
 }
