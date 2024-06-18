@@ -1,6 +1,6 @@
 <?php
 namespace EnsembleCartes;
-
+require_once __DIR__."/../socket/Server.php";
 header("Access-Control-Allow-Origin: *");
 
 // Allow specific HTTP methods
@@ -69,6 +69,13 @@ class PartieController{
 
         var_dump($tmpPlayerA->donnerIndice($tmpPlayerB));
         //echo json_encode($tmpPlayerA->donnerIndice($tmpPlayerB));
+
+    }
+
+    public function launchServer(){
+        //echo "you reached launchServer";
+       Server::launchServer();
+       //Server::launchServer();
 
     }
     
