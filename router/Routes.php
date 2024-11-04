@@ -11,7 +11,9 @@ class Routes{
         ['GET','players',PartieController::class,'getPlayers'],
         ['GET','player/{pseudo}',PartieController::class,'getPlayerByPseudo'],
         ['POST','indice',PartieController::class,'getIndice'],
-        ['GET','launchServer',PartieController::class,'launchServer']
+        ['GET','launchServer',PartieController::class,'launchServer'],
+        ['GET','PartieExists',PartieController::class,'partieExists'],
+        ['GET','create',PartieController::class,'create']
        
     ];
 

@@ -1,14 +1,14 @@
 <?php
 namespace EnsembleCartes;
 require_once __DIR__."/../socket/Server.php";
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:4200");
 
 // Allow specific HTTP methods
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
 // Allow specific headers
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
+header("Access-Control-Allow-Credentials: true");
 // Optionally set the max age for preflight requests
 header("Access-Control-Max-Age: 86400");
 
@@ -21,10 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 class PartieController{
 
-    public function createPartie(){}
-    
+    public function create(){
+
+        $partie = new HanabiPartie(2);
+
+        echo json_encode("partie crée");
+    }
+    public function partieExists(){
+        echo HanabiPartie::getExists();
+    }
     public function init(){
-        echo "endpoint reached";
+        echo json_encode('partie init');
     }
     public function getStatus(){
         echo HanabiPartie::getStatus();

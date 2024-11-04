@@ -7,6 +7,7 @@ require_once __DIR__."/Player.php";
 
 class Partie{
 
+    private bool $partieExists = false;
     private array $jeu;
     protected static array $players=[];
     protected static Int $nbPlayers;
@@ -20,7 +21,7 @@ class Partie{
         // $this->nbCartes=$nbCartes;
         define("NBPLAYERS",$nbPlayers);
         define("MAXCARTES",$nbCartes);
-
+        $this->partieExists = true;
         $this->jeu=Jeu::getJeu(true);
 
     }
@@ -34,7 +35,9 @@ class Partie{
         Jeu::distribCartesOneByOne(self::$players,MAXCARTES);
     }
     
-
+    public static function getExists():bool{
+        return self::$partieExists;
+    }
     public function getJeu():array
     {
         return $this->jeu;
