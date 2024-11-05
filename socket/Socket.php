@@ -3,6 +3,8 @@ namespace EnsembleCartes;
 
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+require_once __DIR__ . '/../vendor/autoload.php';
+
 
 class Socket implements MessageComponentInterface {
     public function onOpen(ConnectionInterface $connection){}

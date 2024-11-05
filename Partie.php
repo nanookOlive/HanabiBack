@@ -57,6 +57,7 @@ class Partie {
 
     }
     public static function init(){
+        Server::launchServer();
         self::$exists=true;
         //on instancie les joueurs avec les infos fetch en connexion 
         for($a=0;$a<self::$nbPlayers;$a++){
