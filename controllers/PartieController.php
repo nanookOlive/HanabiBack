@@ -9,7 +9,7 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
 // Allow specific headers
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
+header("Access-Control-Allow-Credentials: true");
 // Optionally set the max age for preflight requests
 header("Access-Control-Max-Age: 86400");
 
@@ -92,6 +92,13 @@ class PartieController{
         //var_dump($tmpPlayerA->donnerIndice($tmpPlayerB));
         echo json_encode($tmpPlayerA->donnerIndice($tmpPlayerB));
         //var_dump(HanabiPartie::getJeu());
+    }
+
+    public function launchServer(){
+        //echo "you reached launchServer";
+       Server::launchServer();
+       //Server::launchServer();
+
     }
     
     public function getPioche(){
