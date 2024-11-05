@@ -17,7 +17,11 @@ final class TestPlayer extends TestCase{
  * 
  */
 
-    
+ protected function setUp(): void
+ {
+     
+ }
+
     
 
    

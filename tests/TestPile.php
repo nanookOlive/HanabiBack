@@ -40,6 +40,6 @@ class TestPile extends TestCase{
         $partie->init();
         $player = ($partie->getPlayers())[0];
 
-        $this->assertEquals($expected,$player->poseCarte(new Carte($color,$value)));
+        $this->assertEquals($expected,$player->poseCarte(new Carte($value,$color,$value)));
     }
 }
